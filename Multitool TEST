@@ -1,0 +1,35 @@
+@echo off
+chcp 65001 > nul
+title NS TOOL
+color D
+
+:a
+cls
+echo      ███╗   ██╗███████╗    ████████╗ ██████╗  ██████╗ ██╗     
+echo      ████╗  ██║██╔════╝    ╚══██╔══╝██╔═══██╗██╔═══██╗██║     
+echo      ██╔██╗ ██║███████╗       ██║   ██║   ██║██║   ██║██║     
+echo      ██║╚██╗██║╚════██║       ██║   ██║   ██║██║   ██║██║     
+echo      ██║ ╚████║███████║       ██║   ╚██████╔╝╚██████╔╝███████╗
+echo      ╚═╝  ╚═══╝╚══════╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
+echo.
+echo                            NS TOOL 
+echo 1. calculator
+echo 2. github
+set /p q=Select Option
+if "%q%"=="1" goto 1
+if "%q%"=="2" goto 2
+
+:1
+cls
+set /p q=Type your question
+set /a ans=%q%
+echo Answer is %ans%
+set /p input=Enter a command (type 'exit' to quit): 
+if /i "%input%"=="exit" exit /b
+echo You entered: %input%
+pause
+goto a
+
+:2
+start https://github.com
+goto a
