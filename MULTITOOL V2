@@ -1,0 +1,134 @@
+@echo off
+color D
+chcp 65001 >nul
+
+:a
+cls
+echo                         ███╗   ██╗ █████╗ ███████╗    ████████╗ ██████╗  ██████╗ ██╗     
+echo                         ████╗  ██║██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔═══██╗██║     
+echo                         ██╔██╗ ██║███████║███████╗       ██║   ██║   ██║██║   ██║██║     
+echo                         ██║╚██╗██║██╔══██║╚════██║       ██║   ██║   ██║██║   ██║██║     
+echo                         ██║ ╚████║██║  ██║███████║       ██║   ╚██████╔╝╚██████╔╝███████╗
+echo                         ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
+echo. 
+echo                                                   NAS TOOL
+echo                              ╔-------------------------------------------╗
+echo                              ╟ ┏- 1. calculator                          ╢
+echo                              ╟ ┣- 2. Check connection status             ╢
+echo                              ╟ ┣- 3. Get website IP                      ╢
+echo                              ╟ ┣- 4. Ping IP address to check connection ╢
+echo                              ╟ ┣- 5. Open up AI                          ╢
+echo                              ╟ ┣- 6. Open Github                         ╢
+echo                              ╟ ┣- 7. Credits                             ╢
+echo                              ╟ ┣- 8. Ascii Generator                     ╢
+echo                              ╟ ┗- 9. IP lookup                           ╢
+echo                              ╚-------------------------------------------╝
+set /p q= Select Option 
+if "%q%"=="1" goto 1
+if "%q%"=="2" goto 2
+if "%q%"=="3" goto getip
+if "%q%"=="4" goto pingip
+if "%q%"=="5" goto AI
+if "%q%"=="6" goto Github
+if "%q%"=="7" goto Credits
+if "%q%"=="8" goto ascii
+if "%q%"=="9" goto secret
+if "%q%"=="exit" exit
+goto a
+
+:1
+cls
+set /p q=Type your question
+set /a ans=%q%
+echo Answer is %ans%
+set /p input=Enter a command (type 'exit' to quit): 
+if /i "%input%"=="exit" exit /b
+echo You entered: %input%
+pause
+goto a
+
+:2
+cls
+echo checking connection...
+pause
+echo checking connection...
+pause
+echo connection secure!
+pause
+goto a
+
+:getip
+cls
+set /p website=Enter the website URL (e.g., www.example.com): 
+echo Retrieving IP address for %website%...
+ping -n 1 %website% | findstr /i "pinging" | findstr /i /v "::1"
+pause
+goto a
+
+:pingip
+cls
+set /p ip=Enter the IP address to ping: 
+echo Pinging %ip% to check connection...
+ping -n 4 %ip%
+pause
+goto a
+
+:secret
+cls
+echo enter an IP address to look up
+set /p ip=
+if "%ip%"=="back" goto a
+
+
+curl "https://ipinfo.io/%ip%/json" -o geolocation.json
+echo  ==================================
+echo IP geolocation for &"%ip%":
+type geolocation.json
+del geolocation.json
+echo ===================================
+pause
+goto a
+
+:AI
+start https://nolanbot.zapier.app
+goto a
+
+:Github
+start www.github.com/NolanBots/Batch-MULTITOOL
+goto a
+
+:Credits
+cls
+echo  ---------------------------------------------------------
+echo  ██████╗ ██████╗ ███████╗██████╗ ██╗████████╗███████╗
+echo  ██╔════╝██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔════╝
+echo  ██║     ██████╔╝█████╗  ██║  ██║██║   ██║   ███████╗
+echo  ██║     ██╔══██╗██╔══╝  ██║  ██║██║   ██║   ╚════██║
+echo ╚██████╗ ██║  ██║███████╗██████╔╝██║   ██║   ███████║
+echo  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝   ╚═╝   ╚══════╝
+echo           Who made this - Nolan Stahl
+echo           Github - NolanBots
+echo  ---------------------------------------------------------
+pause
+goto a
+
+:ascii
+cls
+echo Simple ASCII Art Generator
+echo --------------------------
+set /p "text=Enter text (or 'quit' to exit): "
+if /i "%text%"=="quit" goto :end
+
+echo.
+echo Your ASCII Art:
+echo.
+
+echo ****************
+echo *              *
+echo * %text%
+echo *              *
+echo ****************
+
+echo.
+pause
+goto a
